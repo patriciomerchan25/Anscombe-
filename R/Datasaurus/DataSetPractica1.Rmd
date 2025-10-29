@@ -1,0 +1,80 @@
+---
+title: "Untitled"
+author: "Wilmer Merchan"
+date: "2025-10-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r cars}
+summary(cars)
+```
+
+## practica data set
+
+```{r resumen-datasaurus}
+library(datasauRus)
+library(dplyr)
+
+datasaurus_dozen %>%
+  group_by(dataset) %>%
+  summarise(
+    mean_x = mean(x),
+    mean_y = mean(y),
+    std_dev_x = sd(x),
+    std_dev_y = sd(y),
+    corr_x_y = cor(x, y)
+  )
+
+```
+
+# ggplot para graficar
+
+```{r grafico-datasaurus}
+
+
+
+
+
+library(ggplot2)
+ggplot(datasaurus_dozen, aes(x = x , y = y, colour = dataset))+  
+geom_point()+
+theme_void()+
+theme(legend.position = "none")+
+facet_wrap(~dataset, ncol = 3)
+
+```
+
+# Regresión lineal sobre el subconjunto "slant_up"
+
+```{r regresion-datasaurus}
+
+library(datasauRus)
+library(dplyr)
+
+slant_up <- datasaurus_dozen %>%
+  filter(dataset == "slant_up")
+
+# Ajustar el modelo de regresión lineal
+
+modelo <- lm(y ~ x, data = slant_up)
+summary(modelo)
+
+#Graficar la regresión
+
+library(ggplot2)
+
+ggplot(slant_up, aes(x = x, y = y)) +
+  geom_point(color = "steelblue") +
+  geom_smooth(method = "lm", se = TRUE, color = "red") +
+  theme_minimal() +
+  labs(title = "Regresión lineal 'slant_up'",
+       x = "x",
+       y = "y")
+
+```
