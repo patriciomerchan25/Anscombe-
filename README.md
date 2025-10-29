@@ -35,9 +35,6 @@ Publicación de LinkedIn:
 
 ---
 
-##  Estructura del repositorio
-
-
 
 ##
 
